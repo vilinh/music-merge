@@ -1,0 +1,22 @@
+.searchResult {
+  display: flex;
+  padding: 10px 15px;
+}
+
+.searchResult hr {
+  color: var(--txt-med);
+}
+
+.searchResult .title {
+  flex: 2.8;
+}
+.searchResult .album {
+  flex: 3;
+}
+.searchResult .num {
+  margin-right: 10px;
+}
+
+.searchResult .time {
+  flex: 0.3;
+}

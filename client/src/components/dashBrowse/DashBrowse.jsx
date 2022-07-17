@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchResult } from "../searchResult/SearchResult";
 import "./dashBrowse.css";
 
 export const DashBrowse = ({ accessToken }) => {
@@ -18,7 +19,9 @@ export const DashBrowse = ({ accessToken }) => {
         <span className="time">Time</span>
       </div>
       <hr></hr>
-      <div className="songs">song</div>
+      <div className="songs">
+        <SearchResult />
+      </div>
     </div>
   );
 };

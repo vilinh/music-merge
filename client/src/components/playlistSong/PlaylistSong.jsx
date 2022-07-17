@@ -6,7 +6,6 @@ import { faCirclePlay, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 export const PlaylistSong = ({song, idx}) => {
   return (
     <div className="playlistSong">
-      {console.log(song)}
       <div className="left">
         <span id="num">{idx+1}</span>
         <img src={song.album.images[2].url} />

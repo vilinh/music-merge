@@ -1,14 +1,22 @@
 .searchResult {
   display: flex;
   padding: 10px 15px;
+  align-items: center;
+  color: var(--txt-med);
+  background-color: var(--white);
+}
+
+.searchResult:hover {
+  filter: brightness(0.9);
 }
 
 .searchResult hr {
   color: var(--txt-med);
 }
 
-.searchResult .title {
-  flex: 2.8;
+.searchResult .song {
+  display: flex;
+  flex: 3;
 }
 .searchResult .album {
   flex: 3;
@@ -18,5 +26,30 @@
 }
 
 .searchResult .time {
+  display: flex;
   flex: 0.3;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchResult .time #options {
+  cursor: pointer;
+}
+
+.searchResult img {
+  margin-right: 10px;
+  width: 45px;
+}
+
+.searchResult .song .song-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchResult .song .song-info .title {
+  color: var(--txt-dark);
+}
+
+.searchResult .song .song-info .artist {
+  font-size: 0.9em;
 }

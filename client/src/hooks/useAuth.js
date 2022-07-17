@@ -13,6 +13,8 @@ export const useAuth = (code) => {
       })
       .then((res) => {
         setAccessToken(res.data.accessToken);
+        console.log(res.data.accessToken)
+        localStorage.setItem("spotAccessToken", res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
         window.history.pushState({}, null, "/");

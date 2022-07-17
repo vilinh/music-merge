@@ -27,7 +27,7 @@
 
 .searchResult .time {
   display: flex;
-  flex: 0.3;
+  flex: 0.4;
   justify-content: space-between;
   align-items: center;
 }

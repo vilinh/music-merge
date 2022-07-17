@@ -15,21 +15,21 @@ export const DashBrowse = () => {
 
   useEffect(() => {
     let accessToken = localStorage.getItem("spotAccessToken");
-    setSpotifyToken(accessToken);
-    spotifyApi.setAccessToken(accessToken);
-  }, [spotifyToken]);
+    if (accessToken) {
+      setSpotifyToken(accessToken);
+      spotifyApi.setAccessToken(spotifyToken);
+    }
+  }, []);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
-    if (!spotifyToken) return setSearchResults([]);
-    {
-      spotifyToken &&
-        spotifyApi
-          .searchTracks(search)
-          .then((data) => {
-            setSearchResults(data.body.tracks.items);
-          })
-          .catch((err) => console.log("Something went wrong", err));
+    if (spotifyToken) {
+      spotifyApi
+        .searchTracks(search)
+        .then((data) => {
+          setSearchResults(data.body.tracks.items);
+        })
+        .catch((err) => console.log("Something went wrong", err));
     }
   }, [search]);
 

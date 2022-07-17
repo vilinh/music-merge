@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import usersRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
-import SpotifyWebApi from "spotify-web-api-node";
+import spotifyRoute from "./routes/spotify.js";
 
 dotenv.config();
 const app = express();
@@ -16,52 +16,6 @@ app.use(
     credentials: true,
   })
 );
-
-// spotify api
-app.post("/login", (req, res) => {
-  const code = req.body.code;
-  const spotifyApi = new SpotifyWebApi({
-    redirectUri: process.env.REDIRECT_URI,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-  });
-
-  spotifyApi
-    .authorizationCodeGrant(code)
-    .then((data) => {
-      res.json({
-        accessToken: data.body.access_token,
-        refreshToken: data.body.refresh_token,
-        expiresIn: data.body.expires_in,
-      });
-    })
-    .catch((err) => {
-      res.sendStatus(400);
-    });
-});
-
-app.post("/refresh", (req, res) => {
-  const refreshToken = req.body.refreshToken;
-  const spotifyApi = new SpotifyWebApi({
-    redirectUri: process.env.REDIRECT_URI,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    refreshToken,
-  });
-
-  spotifyApi
-    .refreshAccessToken()
-    .then((data) => {
-      res.json({
-        accessToken: data.body.accessToken,
-        expiresIn: data.body.expiresIn,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(400);
-    });
-});
 
 // connect to DB
 const connectDB = async () => {
@@ -80,6 +34,7 @@ mongoose.connection.on("disconnected", () => {
 // api routes
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
+app.use("/spotify", spotifyRoute);
 
 // server
 app.get("/", (req, res) => {

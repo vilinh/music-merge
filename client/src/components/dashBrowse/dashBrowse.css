@@ -1,0 +1,59 @@
+.dashBrowse {
+  padding: 30px;
+  height: 100vh;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.dashBrowse .search {
+  width: 40%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid var(--light-border);
+  color: var(--txt-dark);
+}
+
+.dashBrowse .filters {
+  display: flex;
+  gap: 25px;
+  margin: 30px 0px;
+  color: var(--txt-med);
+}
+
+.dashBrowse .filters button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  color: var(--txt-dark);
+}
+
+.dashBrowse .filters button:hover {
+  filter: brightness(.9);
+}
+
+.dashBrowse .header {
+  display: flex;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  color: var(--txt-med);
+}
+
+.dashBrowse .header hr {
+  color: var(--txt-med);
+}
+
+.dashBrowse .header .title {
+  flex: 3;
+}
+.dashBrowse .header .album {
+  flex: 3;
+}
+
+.dashBrowse .header .num {
+  margin-right: 10px;
+}
+
+.dashBrowse .header .time {
+  flex: 0.3;
+}

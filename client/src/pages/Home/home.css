@@ -1,0 +1,15 @@
+.home {
+    display: flex;
+}
+
+.home-container {
+    display: flex;
+    width: 100%;
+}
+
+.home button {
+    border: none;
+    padding: 20px 30px;
+    font-size: 1em;
+    cursor: pointer;
+}

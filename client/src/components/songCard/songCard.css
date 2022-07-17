@@ -1,0 +1,26 @@
+.songCard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 1px solid var(--light-border);
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 130px;
+}
+
+.songCard img {
+  width: 100px;
+  border-radius: 5px;
+  align-self: center;
+}
+
+.songCard .title {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: .8em;
+}
+
+.songCard .artist {
+    margin-top: 3px;
+    font-size: .6em;
+}

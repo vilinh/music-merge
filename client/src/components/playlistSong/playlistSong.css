@@ -1,0 +1,56 @@
+
+.playlistSong {
+    display: flex;
+    justify-content: space-between;
+    font-size: .9em;
+}
+
+.playlistSong img {
+    width: 50px;
+    border-radius: 10px;
+}
+
+.playlistSong .left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--txt-dark);
+}
+
+.playlistSong .info {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-between;
+}
+
+.playlistSong .info .title {
+    font-weight: 500;
+}
+
+.playlistSong .info .artist {
+    color: var(--txt-med);
+    font-size: .9em;
+}
+
+.playlistSong .right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#play, #add {
+    font-size: 1.2em;
+    padding: 10px;
+    border: 1px solid var(--light-border);
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#play {
+    color: orange;
+}
+
+#num, #time, #add {
+    color: var(--txt-med);
+}

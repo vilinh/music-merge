@@ -8,7 +8,7 @@ import "./dashboard.css";
 
 export const Dashboard = ({ code }) => {
   const accessToken = useAuth(code);
-  const [activeView, setActiveView] = useState("home")
+  const [activeView, setActiveView] = useState("home");
 
   return (
     <div className="dashboard">
@@ -17,7 +17,17 @@ export const Dashboard = ({ code }) => {
           <Nav activeView={activeView} setActiveView={setActiveView} />
         </div>
         <div className="dashboard-right">
-          <DashBrowse accessToken={accessToken}/>
+          {activeView === "home" ? (
+            <DashHome accessToken={accessToken} />
+          ) : (
+            <></>
+          )}
+          {activeView === "browse" ? (
+            <DashBrowse accessToken={accessToken} />
+          ) : (
+            <></>
+          )}
+
         </div>
       </div>
     </div>

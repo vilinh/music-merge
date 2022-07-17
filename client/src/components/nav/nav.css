@@ -1,5 +1,6 @@
 .nav {
   height: 100vh;
+  height: 100%;
   background-color: white;
   border-right: 1px solid var(--light-border);
   font-size: .9em;

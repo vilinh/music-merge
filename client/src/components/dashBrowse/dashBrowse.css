@@ -59,6 +59,6 @@
 }
 
 .dashBrowse .songs {
-  height: 83%;
+  max-height: 80%;
   overflow: auto;
 }

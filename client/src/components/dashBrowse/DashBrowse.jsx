@@ -17,12 +17,11 @@ export const DashBrowse = () => {
     let accessToken = localStorage.getItem("spotAccessToken");
     setSpotifyToken(accessToken);
     spotifyApi.setAccessToken(accessToken);
-  }, []);
+  }, [spotifyToken]);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
     if (!spotifyToken) return setSearchResults([]);
-    console.log(spotifyToken);
     {
       spotifyToken &&
         spotifyApi
@@ -36,32 +35,38 @@ export const DashBrowse = () => {
 
   return (
     <div className="dashBrowse">
-      <input
-        type="text"
-        placeholder="search"
-        className="search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <div className="filters">
-        <button>all</button>
-        <button>artists</button>
-        <button>songs</button>
-        <button>playlists</button>
-      </div>
-      <div className="header">
-        <span className="num">#</span>
-        <span className="title">Title</span>
-        <span className="album">Album</span>
-        <span className="time">Time</span>
-      </div>
-      <hr></hr>
-      <div className="songs">
-        {searchResults &&
-          searchResults.map((track, i) => (
-            <SearchResult song={track} idx={i} key={track.id} />
-          ))}
-      </div>
+      {spotifyToken ? (
+        <>
+          <input
+            type="text"
+            placeholder="search"
+            className="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <div className="filters">
+            <button>all</button>
+            <button>artists</button>
+            <button>songs</button>
+            <button>playlists</button>
+          </div>
+          <div className="header">
+            <span className="num">#</span>
+            <span className="title">Title</span>
+            <span className="album">Album</span>
+            <span className="time">Time</span>
+          </div>
+          <hr></hr>
+          <div className="songs">
+            {searchResults &&
+              searchResults.map((track, i) => (
+                <SearchResult song={track} idx={i} key={track.id} />
+              ))}
+          </div>
+        </>
+      ) : (
+        <>loading...</>
+      )}
     </div>
   );
 };

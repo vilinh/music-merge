@@ -14,7 +14,7 @@ export const Dashboard = ({ code }) => {
           <Nav />
         </div>
         <div className="dashboard-right">
-          <DashBrowse accessToken={accessToken}/>
+          <DashHome accessToken={accessToken}/>
         </div>
       </div>
     </div>

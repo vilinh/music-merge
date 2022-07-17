@@ -4,7 +4,8 @@ import { SearchResult } from "../searchResult/SearchResult";
 import "./dashBrowse.css";
 import SpotifyWebApi from "spotify-web-api-node";
 
-export const DashBrowse = ({ accessToken }) => {
+export const DashBrowse = () => {
+  const [spotifyToken, setSpotifyToken] = useState(null);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -13,22 +14,24 @@ export const DashBrowse = ({ accessToken }) => {
   });
 
   useEffect(() => {
-    if (!accessToken) return;
+    let accessToken = localStorage.getItem("spotAccessToken");
+    setSpotifyToken(accessToken);
     spotifyApi.setAccessToken(accessToken);
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
-    if (!accessToken) return;
     if (!search) return setSearchResults([]);
-    spotifyApi.searchTracks(search).then(
-      function (data) {
-        setSearchResults(data.body.tracks.items);
-        console.log(data.body.tracks.items);
-      },
-      function (err) {
-        console.error(err);
-      }
-    );
+    if (!spotifyToken) return setSearchResults([]);
+    console.log(spotifyToken);
+    {
+      spotifyToken &&
+        spotifyApi
+          .searchTracks(search)
+          .then((data) => {
+            setSearchResults(data.body.tracks.items);
+          })
+          .catch((err) => console.log("Something went wrong", err));
+    }
   }, [search]);
 
   return (

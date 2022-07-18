@@ -5,6 +5,7 @@ import { DashHome } from "../../components/dashhome/DashHome";
 import { Nav } from "../../components/nav/Nav";
 import "./dashboard.css";
 import { accessToken } from "../../utils/spotifyAuth.js";
+import { DashArtists } from "../../components/dashArtists/DashArtists";
 
 export const Dashboard = ({ code }) => {
   const [activeView, setActiveView] = useState("home");
@@ -29,6 +30,11 @@ export const Dashboard = ({ code }) => {
           )}
           {activeView === "browse" ? (
             <DashBrowse accessToken={accessToken} />
+          ) : (
+            <></>
+          )}
+          {activeView === "artists" ? (
+            <DashArtists />
           ) : (
             <></>
           )}

@@ -1,0 +1,17 @@
+.dashArtists {
+  padding: 30px;
+  height: 100vh;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.dashArtists h3 {
+  color: var(--txt-dark);
+  margin-bottom: 30px;
+}
+
+.dashArtists .artists {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

@@ -1,0 +1,21 @@
+.artistCard {
+  padding: 20px;
+  border: 1px solid var(--light-border);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--txt-dark);
+  gap: 10px;
+}
+
+.artistCard:hover {
+  cursor: pointer;
+}
+
+.artistCard img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100px;
+}

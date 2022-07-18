@@ -25,6 +25,7 @@ router.get("/loginS", (req, res) => {
     "user-library-modify",
     "user-read-playback-state",
     "user-read-recently-played",
+    "user-follow-read"
   ];
 
   var spotifyApi = new SpotifyWebApi({
@@ -70,7 +71,6 @@ router.get("/callback", (req, res) => {
 
 router.get("/refresh_tokens", (req, res) => {
   const { refresh_token } = req.query;
-  console.log(refresh_token);
 
   const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
@@ -83,7 +83,6 @@ router.get("/refresh_tokens", (req, res) => {
   spotifyApi
     .refreshAccessToken()
     .then((data) => {
-      console.log("the access token has been refreshed!");
       spotifyApi.setAccessToken(data.body["access_token"]);
       res.send(data.body);
     })

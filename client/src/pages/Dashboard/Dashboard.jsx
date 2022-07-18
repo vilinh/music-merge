@@ -3,7 +3,7 @@ import { useState } from "react";
 import { DashBrowse } from "../../components/dashBrowse/DashBrowse";
 import { DashHome } from "../../components/dashhome/DashHome";
 import { Nav } from "../../components/nav/Nav";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../utils/useAuth";
 import "./dashboard.css";
 
 export const Dashboard = ({ code }) => {

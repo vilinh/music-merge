@@ -14,7 +14,13 @@ export const Dashboard = ({ code }) => {
 
   useEffect(() => {
     setToken(accessToken);
+    let navView = localStorage.getItem("navView" || "home")
+    setActiveView(navView);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("navView", activeView);
+  }, [activeView]);
 
   return (
     <div className="dashboard">
@@ -33,11 +39,7 @@ export const Dashboard = ({ code }) => {
           ) : (
             <></>
           )}
-          {activeView === "artists" ? (
-            <DashArtists />
-          ) : (
-            <></>
-          )}
+          {activeView === "artists" ? <DashArtists /> : <></>}
         </div>
       </div>
     </div>

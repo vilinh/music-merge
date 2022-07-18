@@ -7,10 +7,12 @@
   text-align: center;
   color: var(--txt-dark);
   gap: 10px;
+  transition: .15s ease-in;
 }
 
 .artistCard:hover {
   cursor: pointer;
+  background-color: var(--light-border);
 }
 
 .artistCard img {

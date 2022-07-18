@@ -3,39 +3,37 @@ import { useEffect } from "react";
 import { SearchResult } from "../searchResult/SearchResult";
 import "./dashBrowse.css";
 import SpotifyWebApi from "spotify-web-api-node";
+import { accessToken } from "../../utils/spotifyAuth";
 
 export const DashBrowse = () => {
-  const [spotifyToken, setSpotifyToken] = useState(null);
+  const [token, setToken] = useState(null);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.REACT_APP_CLIENT_ID,
+  let spotifyApi = new SpotifyWebApi({
+    accessToken: token,
   });
 
   useEffect(() => {
-    let accessToken = localStorage.getItem("spotAccessToken");
-    if (accessToken) {
-      setSpotifyToken(accessToken);
-      spotifyApi.setAccessToken(spotifyToken);
-    }
+    setToken(accessToken);
+    spotifyApi.setAccessToken(token);
   }, []);
 
   useEffect(() => {
     if (!search) return setSearchResults([]);
-    if (spotifyToken) {
-      spotifyApi
-        .searchTracks(search)
-        .then((data) => {
-          setSearchResults(data.body.tracks.items);
-        })
-        .catch((err) => console.log("Something went wrong", err));
-    }
+    spotifyApi
+      .searchTracks(search)
+      .then((data) => {
+        setSearchResults(data.body.tracks.items);
+      })
+      .catch((err) => {
+        return err;
+      });
   }, [search]);
 
   return (
     <div className="dashBrowse">
-      {spotifyToken ? (
+      {token ? (
         <>
           <input
             type="text"

@@ -6,8 +6,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export const SongsPreview = ({ accessToken, playlistID }) => {
-  const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.REACT_APP_CLIENT_ID,
+  let spotifyApi = new SpotifyWebApi({
+    accessToken: accessToken,
   });
 
   const [playlist1, setPlaylist1] = useState();

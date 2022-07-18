@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { DashBrowse } from "../../components/dashBrowse/DashBrowse";
 import { DashHome } from "../../components/dashhome/DashHome";
 import { Nav } from "../../components/nav/Nav";
-import { useAuth } from "../../utils/useAuth";
 import "./dashboard.css";
+import { accessToken } from "../../utils/spotifyAuth.js";
 
 export const Dashboard = ({ code }) => {
-  const accessToken = useAuth(code);
   const [activeView, setActiveView] = useState("home");
+  const [token, setToken] = useState(null);
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    setToken(accessToken);
+  }, []);
 
   return (
     <div className="dashboard">
@@ -27,7 +32,6 @@ export const Dashboard = ({ code }) => {
           ) : (
             <></>
           )}
-
         </div>
       </div>
     </div>

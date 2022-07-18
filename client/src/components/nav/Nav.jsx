@@ -19,6 +19,7 @@ import "./nav.css";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../utils/spotifyAuth";
 
 export const Nav = ({ activeView, setActiveView }) => {
   const { loading, error, dispatch } = useContext(AuthContext);
@@ -130,6 +131,9 @@ export const Nav = ({ activeView, setActiveView }) => {
         </div>
         <div className="link" onClick={handleLogout}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} /> Log Out
+        </div>
+        <div className="link" onClick={logout}>
+          <FontAwesomeIcon icon={faArrowRightFromBracket} /> Log Out fr Spotify
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import "./dashboard.css";
 import { accessToken } from "../../utils/spotifyAuth.js";
 import { DashArtists } from "../../components/dashArtists/DashArtists";
 
-export const Dashboard = ({ code }) => {
+export const Dashboard = () => {
   const [activeView, setActiveView] = useState("home");
   const [token, setToken] = useState(null);
   const [profile, setProfile] = useState(null);

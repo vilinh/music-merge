@@ -30,7 +30,7 @@ export const Home = () => {
     <div className="home">
       <div className="home-container">
         {accessToken ? (
-          <Dashboard code={code} />
+          <Dashboard/>
         ) : (
           <div className="spotify-login">
             <a href="http://localhost:3001/spotify/loginS">

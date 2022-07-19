@@ -6,6 +6,7 @@ import { Nav } from "../../components/nav/Nav";
 import "./dashboard.css";
 import { accessToken } from "../../utils/spotifyAuth.js";
 import { DashArtists } from "../../components/dashArtists/DashArtists";
+import { Merge } from "../Merge/Merge";
 
 export const Dashboard = () => {
   const [activeView, setActiveView] = useState("home");
@@ -40,6 +41,7 @@ export const Dashboard = () => {
             <></>
           )}
           {activeView === "artists" ? <DashArtists /> : <></>}
+          {activeView === "merge" ? <Merge /> : <></>}
         </div>
       </div>
     </div>

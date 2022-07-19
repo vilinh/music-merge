@@ -11,13 +11,13 @@ export const Login = () => {
     password: undefined,
   });
 
-  const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   
   useEffect(()=>{
     if (user) {
       navigate("/spotify")
     }
-  }, [])
+  })
   
   const handleInput = (e) => {
     setUserInfo((prev) => ({

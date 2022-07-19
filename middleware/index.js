@@ -5,6 +5,8 @@ import cors from "cors";
 import usersRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
 import spotifyRoute from "./routes/spotify.js";
+import deezerRoute from "./routes/deezer.js";
+import axios from "axios";
 
 dotenv.config();
 const app = express();
@@ -35,6 +37,7 @@ mongoose.connection.on("disconnected", () => {
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
 app.use("/spotify", spotifyRoute);
+app.use("/deezer", deezerRoute);
 
 // server
 app.get("/", (req, res) => {

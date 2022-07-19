@@ -40,7 +40,7 @@ export const DashArtists = () => {
         {artists &&
           artists.map((artist) => (
             <div>
-              <ArtistCard artist={artist}/>
+              <ArtistCard key={artist.name} artist={artist}/>
             </div>
           ))}
       </div>

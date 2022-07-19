@@ -13,6 +13,12 @@ export const Playlist = ({ accessToken }) => {
   });
 
   useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (!accessToken) return;
     spotifyApi
       .getMyRecentlyPlayedTracks({
         limit: 3,

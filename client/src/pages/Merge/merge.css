@@ -34,3 +34,8 @@
   margin-right: 10px;
   margin-bottom: 20px;
 }
+
+.merge p {
+  color: var(--txt-med);
+  font-size: .9em;
+}

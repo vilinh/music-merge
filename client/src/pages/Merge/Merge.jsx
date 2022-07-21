@@ -5,6 +5,9 @@ import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import { accessToken } from "../../utils/spotifyAuth";
 import { TempSong } from "../../components/tempSong/TempSong";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 
 export const Merge = () => {
   const [playlistID, setPlaylistID] = useState("");
@@ -75,9 +78,10 @@ export const Merge = () => {
         {spotifyResults.length > 0 ? (
           spotifyResults.map((song, i) => <TempSong key={i} song={song} />)
         ) : (
-          <p></p>
+          <p>Enter a link to your playlist to get started!</p>
         )}
       </div>
+      
     </div>
   );
 };

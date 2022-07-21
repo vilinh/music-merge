@@ -1,0 +1,54 @@
+.tempSong {
+  display: flex;
+  max-width: 300px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--txt-lighter);
+  font-size: 0.9em;
+  gap: 10px;
+  padding: 15px 15px 15px 20px;
+  border-radius: 15px;
+}
+
+.tempSong:hover {
+  filter: brightness(0.9);
+}
+
+.tempSong img {
+  width: 30px;
+  border-radius: 30px;
+}
+
+.tempSong-r {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.tempSong-r .info {
+  display: flex;
+  flex-direction: column;
+}
+
+.tempSong-r p {
+  max-height: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tempSong-r .info .artist {
+  font-size: 0.8em;
+}
+
+.tempSong-r p {
+  max-width: 200px;
+  text-overflow: hidden;
+}
+
+.tempSong-l .delete {
+  color: red;
+  font-size: 0.9em;
+  cursor: pointer;
+}

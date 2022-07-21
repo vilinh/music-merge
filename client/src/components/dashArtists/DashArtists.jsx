@@ -21,10 +21,8 @@ export const DashArtists = () => {
 
   useEffect(() => {
     if (!token) return;
-    console.log(token);
     spotifyApi.getFollowedArtists({ limit: 10 }).then(
       function (data) {
-        console.log(data.body);
         setArtists(data.body.artists.items);
       },
       function (err) {
@@ -39,9 +37,7 @@ export const DashArtists = () => {
       <div className="artists">
         {artists &&
           artists.map((artist) => (
-            <div>
-              <ArtistCard key={artist.name} artist={artist}/>
-            </div>
+            <ArtistCard key={artist.id} artist={artist} />
           ))}
       </div>
     </div>

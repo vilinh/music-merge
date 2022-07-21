@@ -4,6 +4,8 @@ import { SearchResult } from "../searchResult/SearchResult";
 import "./dashBrowse.css";
 import SpotifyWebApi from "spotify-web-api-node";
 import { accessToken } from "../../utils/spotifyAuth";
+import { faCog, faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const DashBrowse = () => {
   const [token, setToken] = useState(null);
@@ -63,7 +65,7 @@ export const DashBrowse = () => {
           </div>
         </>
       ) : (
-        <>loading...</>
+        <FontAwesomeIcon className="fa-spin" icon={faCog} />
       )}
     </div>
   );

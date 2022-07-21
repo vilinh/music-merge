@@ -11,7 +11,21 @@
 }
 
 .dashArtists .artists {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashArtists .loader {
+  text-align: center;
+  font-size: 4em;
+  color: var(--txt-med);
+}
+
+.dashArtists .load {
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

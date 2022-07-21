@@ -7,12 +7,11 @@ import { accessToken } from "../../utils/spotifyAuth";
 import { TempSong } from "../../components/tempSong/TempSong";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-
 export const Merge = () => {
   const [playlistID, setPlaylistID] = useState("");
   const [playlist, setPlaylist] = useState();
   const [spotifyResults, setSpotifyResults] = useState([]);
+  const [disable, setDisable] = useState(false);
 
   let spotifyApi = new SpotifyWebApi({
     accessToken: accessToken,
@@ -41,6 +40,7 @@ export const Merge = () => {
         .catch((err) => console.log(err));
     };
     fetchPlaylist();
+    setDisable(true);
   };
 
   const searchSpotify = () => {
@@ -73,7 +73,9 @@ export const Merge = () => {
         }}
         placeholder="Deezer Playlist Link"
       />
-      <button className="search" onClick={handleClick}>search</button>
+      <button disabled={disable} className={`search ${disable ? 'disabled' : ''}`} onClick={handleClick}>
+        search
+      </button>
       <div className="spotifyResults">
         {spotifyResults.length > 0 ? (
           spotifyResults.map((song, i) => <TempSong key={i} song={song} />)
@@ -81,7 +83,6 @@ export const Merge = () => {
           <p>Enter a link to your playlist to get started!</p>
         )}
       </div>
-      
     </div>
   );
 };

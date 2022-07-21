@@ -20,6 +20,10 @@
   filter: brightness(0.95);
 }
 
+.merge .disabled {
+  cursor: not-allowed;
+}
+
 .spotifyResults {
   display: flex;
   flex-wrap: wrap;

@@ -1,11 +1,36 @@
 .merge {
-    padding: 30px;
-    height: 100vh;
-    color: var(--txt-dark);
+  padding: 30px;
+  height: 100vh;
+  color: var(--txt-dark);
+}
+
+.merge h3 {
+  margin-bottom: 20px;
+}
+
+.merge .search {
+  padding: 10px 15px;
+  font-size: 0.9em;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: orange;
+}
+
+.merge .search:hover {
+  filter: brightness(0.95);
 }
 
 .spotifyResults {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.merge input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--light-border);
+  width: 50%;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }

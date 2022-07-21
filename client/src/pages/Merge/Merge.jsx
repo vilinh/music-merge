@@ -16,6 +16,10 @@ export const Merge = () => {
   });
 
   useEffect(() => {
+    searchSpotify();
+  }, [playlist]);
+
+  useEffect(() => {
     if (!accessToken) return;
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
@@ -66,8 +70,7 @@ export const Merge = () => {
         }}
         placeholder="Deezer Playlist Link"
       />
-      <button onClick={handleClick}>search</button>
-      <button onClick={searchSpotify}>search spotify</button>
+      <button className="search" onClick={handleClick}>search</button>
       <div className="spotifyResults">
         {spotifyResults.length > 0 ? (
           spotifyResults.map((song, i) => <TempSong key={i} song={song} />)

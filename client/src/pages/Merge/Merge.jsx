@@ -5,6 +5,8 @@ import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import { accessToken } from "../../utils/spotifyAuth";
 import { TempSong } from "../../components/tempSong/TempSong";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 
 export const Merge = () => {
   const [playlistID, setPlaylistID] = useState("");
@@ -113,10 +115,10 @@ export const Merge = () => {
           <p>Enter a link to your playlist to get started!</p>
         )}
       </div>
+      <div className="add"></div>
       {spotifyResults.length > 0 ? (
         <button className="addToSpotify" onClick={addToSpotify}>
-          {" "}
-          add to Spotify playlist
+          add to <FontAwesomeIcon icon={faSpotify} />
         </button>
       ) : (
         <></>

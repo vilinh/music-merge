@@ -28,13 +28,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  max-height: 77vh;
+  overflow: auto;
 }
 
 .merge input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--light-border);
-  width: 50%;
+  width: 40%;
   margin-right: 10px;
   margin-bottom: 20px;
 }

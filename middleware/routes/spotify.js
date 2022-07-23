@@ -25,7 +25,9 @@ router.get("/loginS", (req, res) => {
     "user-library-modify",
     "user-read-playback-state",
     "user-read-recently-played",
-    "user-follow-read"
+    "user-follow-read",
+    "playlist-modify-public",
+    "playlist-modify-private",
   ];
 
   var spotifyApi = new SpotifyWebApi({
@@ -65,7 +67,7 @@ router.get("/callback", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.redirect(`/?${querystring.stringify({ error: 'invalid_token' })}`);
+      res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
     });
 });
 

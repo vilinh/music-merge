@@ -3,7 +3,7 @@ import "./tempSong.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-export const TempSong = ({ song }) => {
+export const TempSong = ({ song, setRemove, setRemoveID }) => {
   return (
     <div className="tempSong">
       <div className="tempSong-r">
@@ -14,7 +14,14 @@ export const TempSong = ({ song }) => {
         </div>
       </div>
       <div className="tempSong-l">
-        <FontAwesomeIcon className="delete" icon={faXmark} />
+        <FontAwesomeIcon
+          onClick={() => {
+            setRemove(true);
+            setRemoveID(song.id)
+          }}
+          className="delete"
+          icon={faXmark}
+        />
       </div>
     </div>
   );

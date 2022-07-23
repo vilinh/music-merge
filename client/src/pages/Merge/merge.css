@@ -43,3 +43,16 @@
   color: var(--txt-med);
   font-size: .9em;
 }
+
+.merge .addToSpotify {
+  font-size: .9em;
+  background-color: var(--txt-dark);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.merge .addToSpotify:hover {
+  filter: brightness(.9);
+}

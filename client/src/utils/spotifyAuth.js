@@ -1,4 +1,5 @@
 import axios from "axios";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const LOCALSTORAGE_KEYS = {
   accessToken: "spotify_access_token",
@@ -103,3 +104,18 @@ const getAccessToken = () => {
 
 export const accessToken = getAccessToken();
 
+let spotifyApi = new SpotifyWebApi({
+  accessToken: accessToken,
+});
+
+const getUser = () => {
+  if (!accessToken) return;
+  spotifyApi
+    .getMe()
+    .then((data) => {
+      return data.body.id;
+    })
+    .catch((err) => console.log(err));
+};
+
+export const user = getUser();

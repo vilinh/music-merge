@@ -28,6 +28,7 @@ router.get("/loginS", (req, res) => {
     "user-follow-read",
     "playlist-modify-public",
     "playlist-modify-private",
+    "playlist-read-private"
   ];
 
   var spotifyApi = new SpotifyWebApi({

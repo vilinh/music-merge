@@ -32,13 +32,17 @@
   overflow: auto;
 }
 
+.merge-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .merge input {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--light-border);
-  width: 40%;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  width: 50%;
 }
 
 .merge p {

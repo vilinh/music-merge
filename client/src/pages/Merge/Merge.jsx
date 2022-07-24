@@ -18,7 +18,7 @@ export const Merge = () => {
   const [playlist, setPlaylist] = useState();
   const [spotifyResults, setSpotifyResults] = useState([]);
   const [spotifyPlaylists, setSpotifyPlaylists] = useState([]);
-  const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(true);
   const [remove, setRemove] = useState(false);
   const [removeID, setRemoveID] = useState(null);
   const [spotifyPlaylist, setSpotifyPlaylist] = useState("");
@@ -46,12 +46,20 @@ export const Merge = () => {
     }
   }, [remove]);
 
+  useEffect(() => {
+    if (!playlistID || !spotifyPlaylistID) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [playlistID, spotifyPlaylistID]);
+
   const handleSearch = () => {
     if (!playlistID) return;
     let parsedID = playlistID.split("/").at(-1);
     console.log(parsedID);
     fetchPlaylist(parsedID);
-    setDisable(true);
+    setPlaylistID("");
   };
 
   const fetchPlaylist = async (parsedID) => {

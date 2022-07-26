@@ -26,6 +26,7 @@ export const Merge = () => {
   const [spotifyPlaylist, setSpotifyPlaylist] = useState("");
   const [added, setAdded] = useState(false);
   const [addNotif, setAddNotif] = useState(false);
+  const [errorNotif, setErrorNotif] = useState(false);
 
   // find some way to get user without using state,, save to localstorage?
 
@@ -141,7 +142,10 @@ export const Merge = () => {
         setAddNotif(true);
       })
       .then(() => setSpotifyResults([]))
-      .catch((err) => console.log("Something went wrong!", err));
+      .catch((err) => {
+        console.log("Something went wrong!", err);
+
+      });
   };
 
   return (
@@ -205,7 +209,7 @@ export const Merge = () => {
       ) : (
         <></>
       )}
-      <PageNotif styles={addNotif ? "fadeIn" : "fadeOut"} />
+      <PageNotif styles={addNotif ? "fadeIn" : "fadeOut"} message={"Added to playlist!"}/>
     </div>
   );
 };

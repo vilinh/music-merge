@@ -13,12 +13,11 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { PageNotif } from "../../components/pageNotif/PageNotif";
 
-export const Merge = () => {
+export const Merge = ({spotifyResults, setSpotifyResults}) => {
   const [user, setUser] = useState("");
   const [playlistID, setPlaylistID] = useState("");
+  const [playlist, setPlaylist] = useState([]);
   const [spotifyPlaylistID, setSpotifyPlaylistID] = useState("");
-  const [playlist, setPlaylist] = useState();
-  const [spotifyResults, setSpotifyResults] = useState([]);
   const [spotifyPlaylists, setSpotifyPlaylists] = useState([]);
   const [disable, setDisable] = useState(true);
   const [remove, setRemove] = useState(false);
@@ -46,7 +45,6 @@ export const Merge = () => {
     spotifyApi
       .getMe()
       .then((data) => {
-        console.log(data.body);
         setUser(data.body);
       })
       .catch((err) => console.log(err));
@@ -58,8 +56,6 @@ export const Merge = () => {
 
   useEffect(() => {
     if (remove) {
-      console.log("remove clicked");
-      console.log(removeID);
       setSpotifyResults(spotifyResults.filter((song) => song.id != removeID));
       setRemove(false);
     }
@@ -207,7 +203,7 @@ export const Merge = () => {
       </div>
       <div className="add"></div>
       {spotifyResults.length > 0 ? (
-        <button className="addToSpotify" onClick={addToSpotify}>
+        <button className={`addToSpotify ${!spotifyPlaylistID ? "disabled" : ""}`} onClick={addToSpotify}>
           add to <FontAwesomeIcon icon={faSpotify} />
         </button>
       ) : (

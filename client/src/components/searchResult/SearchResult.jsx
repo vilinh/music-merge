@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./searchResult.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { Menu } from "../menu/Menu";
 
-export const SearchResult = ({ song, idx }) => {
+export const SearchResult = ({
+  song,
+  idx,
+  spotifyResults,
+  setSpotifyResults,
+}) => {
   const [hoverSearchResult, setHoverSearchResult] = useState(false);
 
   const handleMouseOver = () => {
@@ -43,9 +49,14 @@ export const SearchResult = ({ song, idx }) => {
       <span className="album">{song.album.name}</span>
       <div className="time">
         <span>{convertMsToTime(song.duration_ms)}</span>
-        {hoverSearchResult && (
-          <FontAwesomeIcon id="options" icon={faEllipsis} />
-        )}
+        <FontAwesomeIcon
+          id="options"
+          icon={faCirclePlus}
+          onClick={() => {
+            console.log(song);
+            setSpotifyResults((spotifyResults) => [...spotifyResults, song]);
+          }}
+        />
       </div>
     </div>
   );

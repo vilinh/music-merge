@@ -28,7 +28,7 @@
 }
 
 .dashBrowse .filters button:hover {
-  filter: brightness(.9);
+  filter: brightness(0.9);
 }
 
 .dashBrowse .header {
@@ -61,4 +61,9 @@
 .dashBrowse .songs {
   max-height: 80%;
   overflow: auto;
+  position: relative;
+}
+
+.dashBrowse .song {
+  position: relative;
 }

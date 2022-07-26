@@ -11,11 +11,11 @@ import { Merge } from "../Merge/Merge";
 export const Dashboard = () => {
   const [activeView, setActiveView] = useState("home");
   const [token, setToken] = useState(null);
-  const [profile, setProfile] = useState(null);
+  const [spotifyResults, setSpotifyResults] = useState([]);
 
   useEffect(() => {
     setToken(accessToken);
-    let navView = localStorage.getItem("navView" || "home")
+    let navView = localStorage.getItem("navView" || "home");
     setActiveView(navView);
   }, []);
 
@@ -36,12 +36,23 @@ export const Dashboard = () => {
             <></>
           )}
           {activeView === "browse" ? (
-            <DashBrowse accessToken={accessToken} />
+            <DashBrowse
+              accessToken={accessToken}
+              spotifyResults={spotifyResults}
+              setSpotifyResults={setSpotifyResults}
+            />
           ) : (
             <></>
           )}
           {activeView === "artists" ? <DashArtists /> : <></>}
-          {activeView === "merge" ? <Merge /> : <></>}
+          {activeView === "merge" ? (
+            <Merge
+              spotifyResults={spotifyResults}
+              setSpotifyResults={setSpotifyResults}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

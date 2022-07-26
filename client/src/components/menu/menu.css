@@ -1,0 +1,22 @@
+.menu {
+  width: 100px;
+  background-color: var(--white);
+  position: absolute;
+  top: 40px;
+  right: 0;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--txt-dark);
+  z-index: 9;
+}
+
+.menu span {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu span:hover {
+  background-color: lightgrey;
+}

@@ -59,6 +59,10 @@
   margin-top: 10px;
 }
 
+.merge .addtoSpotify .disabled {
+  cursor: not-allowed;
+}
+
 .merge .addToSpotify:hover {
   filter: brightness(.9);
 }

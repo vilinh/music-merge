@@ -4,10 +4,9 @@ import { SearchResult } from "../searchResult/SearchResult";
 import "./dashBrowse.css";
 import SpotifyWebApi from "spotify-web-api-node";
 import { accessToken } from "../../utils/spotifyAuth";
-import { faCog, faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-export const DashBrowse = () => {
+export const DashBrowse = ({ spotifyResults, setSpotifyResults }) => {
   const [token, setToken] = useState(null);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -60,7 +59,13 @@ export const DashBrowse = () => {
           <div className="songs">
             {searchResults &&
               searchResults.map((track, i) => (
-                <SearchResult song={track} idx={i} key={track.id} />
+                <SearchResult
+                  song={track}
+                  idx={i}
+                  key={track.id}
+                  spotifyResults={spotifyResults}
+                  setSpotifyResults={setSpotifyResults}
+                />
               ))}
           </div>
         </>

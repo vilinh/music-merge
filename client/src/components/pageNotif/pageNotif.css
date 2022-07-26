@@ -8,12 +8,16 @@
   right: 20px;
 }
 
+.err {
+    background-color: rgb(231, 30, 30);
+}
+
 .fadeIn {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  transition: opacity 0.7s ease-in;
 }
 
 .fadeOut {
   opacity: 0;
-  transition: opacity 1s ease-out;
+  transition: opacity .5s ease-out;
 }

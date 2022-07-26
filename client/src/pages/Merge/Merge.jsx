@@ -23,10 +23,8 @@ export const Merge = () => {
   const [disable, setDisable] = useState(true);
   const [remove, setRemove] = useState(false);
   const [removeID, setRemoveID] = useState(null);
-  const [spotifyPlaylist, setSpotifyPlaylist] = useState("");
-  const [added, setAdded] = useState(false);
   const [addNotif, setAddNotif] = useState(false);
-  const [errorNotif, setErrorNotif] = useState(false);
+  const [errNotif, setErrNotif] = useState(false);
 
   // find some way to get user without using state,, save to localstorage?
 
@@ -73,6 +71,13 @@ export const Merge = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, [addNotif]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrNotif(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [errNotif]);
 
   useEffect(() => {
     if (!playlistID || !spotifyPlaylistID) {
@@ -138,13 +143,12 @@ export const Merge = () => {
       .addTracksToPlaylist(spotifyPlaylistID, trackIDs)
       .then((data) => {
         console.log("Added tracks to playlist!");
-        setAdded(true);
         setAddNotif(true);
       })
       .then(() => setSpotifyResults([]))
       .catch((err) => {
         console.log("Something went wrong!", err);
-
+        setErrNotif(true);
       });
   };
 
@@ -209,7 +213,14 @@ export const Merge = () => {
       ) : (
         <></>
       )}
-      <PageNotif styles={addNotif ? "fadeIn" : "fadeOut"} message={"Added to playlist!"}/>
+      <PageNotif
+        styles={addNotif ? "fadeIn" : "fadeOut"}
+        message={"Added to playlist!"}
+      />
+      <PageNotif
+        styles={`err ` + (errNotif ? "fadeIn" : "fadeOut")}
+        message={"Error!"}
+      />
     </div>
   );
 };

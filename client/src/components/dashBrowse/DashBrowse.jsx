@@ -18,6 +18,7 @@ export const DashBrowse = ({ spotifyResults, setSpotifyResults }) => {
   useEffect(() => {
     setToken(accessToken);
     spotifyApi.setAccessToken(token);
+    setSearch(localStorage.getItem("searchBar") || "");
   }, []);
 
   useEffect(() => {
@@ -41,7 +42,10 @@ export const DashBrowse = ({ spotifyResults, setSpotifyResults }) => {
             placeholder="search"
             className="search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              localStorage.setItem("searchBar", e.target.value);
+            }}
           />
           <div className="filters">
             <button>all</button>

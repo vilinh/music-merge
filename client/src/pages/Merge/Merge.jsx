@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import "./merge.css";
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
-import { accessToken, user } from "../../utils/spotifyAuth";
+import { accessToken } from "../../utils/spotifyAuth";
 import { TempSong } from "../../components/tempSong/TempSong";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
@@ -11,8 +11,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { PageNotif } from "../../components/pageNotif/PageNotif";
 
 export const Merge = () => {
+  const [user, setUser] = useState("");
   const [playlistID, setPlaylistID] = useState("");
   const [spotifyPlaylistID, setSpotifyPlaylistID] = useState("");
   const [playlist, setPlaylist] = useState();
@@ -22,6 +24,10 @@ export const Merge = () => {
   const [remove, setRemove] = useState(false);
   const [removeID, setRemoveID] = useState(null);
   const [spotifyPlaylist, setSpotifyPlaylist] = useState("");
+  const [added, setAdded] = useState(false);
+  const [addNotif, setAddNotif] = useState(false);
+
+  // find some way to get user without using state,, save to localstorage?
 
   let spotifyApi = new SpotifyWebApi({
     accessToken: accessToken,
@@ -33,8 +39,22 @@ export const Merge = () => {
   }, [accessToken]);
 
   useEffect(() => {
-    searchSpotify();
     getSpotifyPlaylists();
+  }, [user]);
+
+  useEffect(() => {
+    if (!accessToken) return;
+    spotifyApi
+      .getMe()
+      .then((data) => {
+        console.log(data.body);
+        setUser(data.body);
+      })
+      .catch((err) => console.log(err));
+  }, [accessToken]);
+
+  useEffect(() => {
+    searchSpotify();
   }, [playlist]);
 
   useEffect(() => {
@@ -47,6 +67,13 @@ export const Merge = () => {
   }, [remove]);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setAddNotif(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [addNotif]);
+
+  useEffect(() => {
     if (!playlistID || !spotifyPlaylistID) {
       setDisable(true);
     } else {
@@ -57,7 +84,6 @@ export const Merge = () => {
   const handleSearch = () => {
     if (!playlistID) return;
     let parsedID = playlistID.split("/").at(-1);
-    console.log(parsedID);
     fetchPlaylist(parsedID);
     setPlaylistID("");
   };
@@ -66,7 +92,6 @@ export const Merge = () => {
     await axios
       .get(`/deezer/search/${parsedID}`)
       .then((res) => {
-        console.log(res.data.data);
         setPlaylist(res.data.data);
       })
       .catch((err) => console.log(err));
@@ -76,15 +101,14 @@ export const Merge = () => {
   const handleSelect = (event: SelectChangeEvent) => {
     setSpotifyPlaylistID(event.target.value);
   };
-  useEffect(() => {
-    console.log(spotifyPlaylistID);
-  }, [spotifyPlaylistID]);
 
   const getSpotifyPlaylists = () => {
     spotifyApi
-      .getUserPlaylists(user)
+      .getUserPlaylists(user.id)
       .then((data) => {
-        setSpotifyPlaylists(data.body.items);
+        setSpotifyPlaylists(
+          data.body.items.filter((playlist) => playlist.owner.id === user.id)
+        );
       })
       .catch((err) => console.log(err));
   };
@@ -95,7 +119,7 @@ export const Merge = () => {
       spotifyApi
         .searchTracks(track.title)
         .then((data) => {
-          console.log(data.body.tracks.items[0]);
+          console.log("need to check if actually song or not");
           setSpotifyResults((spotifyResults) => [
             ...spotifyResults,
             data.body.tracks.items[0],
@@ -109,15 +133,15 @@ export const Merge = () => {
 
   const addToSpotify = () => {
     let trackIDs = spotifyResults.map((song) => `spotify:track:${song.id}`);
-    console.log(trackIDs);
-    spotifyApi.addTracksToPlaylist(spotifyPlaylistID, trackIDs).then(
-      function (data) {
+    spotifyApi
+      .addTracksToPlaylist(spotifyPlaylistID, trackIDs)
+      .then((data) => {
         console.log("Added tracks to playlist!");
-      },
-      function (err) {
-        console.log("Something went wrong!", err);
-      }
-    );
+        setAdded(true);
+        setAddNotif(true);
+      })
+      .then(() => setSpotifyResults([]))
+      .catch((err) => console.log("Something went wrong!", err));
   };
 
   return (
@@ -170,7 +194,7 @@ export const Merge = () => {
             />
           ))
         ) : (
-          <p>Enter a link to your playlist to get started!</p>
+          <p>Enter a link to a deezer playlist to get started!</p>
         )}
       </div>
       <div className="add"></div>
@@ -181,6 +205,7 @@ export const Merge = () => {
       ) : (
         <></>
       )}
+      <PageNotif styles={addNotif ? "fadeIn" : "fadeOut"} />
     </div>
   );
 };

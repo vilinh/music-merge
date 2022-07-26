@@ -28,7 +28,7 @@ export const logout = () => {
   for (const property in LOCALSTORAGE_KEYS) {
     window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
   }
-  
+
   window.location = window.location.origin;
 };
 
@@ -89,13 +89,12 @@ const getAccessToken = () => {
   }
 
   if (queryParams[LOCALSTORAGE_KEYS.accessToken]) {
-
     for (const property in queryParams) {
       window.localStorage.setItem(property, queryParams[property]);
     }
 
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
-    window.history.pushState({}, null, "/")
+    window.history.pushState({}, null, "/");
     return queryParams[LOCALSTORAGE_KEYS.accessToken];
   }
 
@@ -108,14 +107,8 @@ let spotifyApi = new SpotifyWebApi({
   accessToken: accessToken,
 });
 
-const getUser = () => {
-  if (!accessToken) return;
-  spotifyApi
-    .getMe()
-    .then((data) => {
-      return data.body.id;
-    })
-    .catch((err) => console.log(err));
+const getUser = async () => {
+
 };
 
 export const user = getUser();

@@ -12,6 +12,7 @@ export const SearchResult = ({
   setSpotifyResults,
 }) => {
   const [hoverSearchResult, setHoverSearchResult] = useState(false);
+  const [added, setAdded] = useState(false);
 
   const { addSongtoMerge, removeSongFromMerge, mergeList } =
     useContext(MergeContext);
@@ -34,6 +35,10 @@ export const SearchResult = ({
     return `${minutes}:${padTo2Digits(seconds)}`;
   };
 
+  useState(() => {
+    mergeList.map((element) => element.id).includes(song.id) && setAdded(true);
+  }, []);
+
   return (
     <div
       className="searchResult"
@@ -52,16 +57,11 @@ export const SearchResult = ({
       <div className="time">
         <span>{convertMsToTime(song.duration_ms)}</span>
         <FontAwesomeIcon
-          className={"options"}
-          icon={
-            mergeList.map((element) => element.id).includes(song.id)
-              ? faCheck
-              : faCirclePlus
-          }
+          className={`options ${added ? "added" : ""}`}
+          icon={added ? faCheck : faCirclePlus}
           onClick={() => {
-            mergeList.map((element) => element.id).includes(song.id)
-              ? removeSongFromMerge(song.id)
-              : addSongtoMerge(song);
+            added ? removeSongFromMerge(song.id) : addSongtoMerge(song);
+            setAdded(!added);
           }}
         />
       </div>

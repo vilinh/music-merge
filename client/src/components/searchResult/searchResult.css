@@ -33,12 +33,13 @@
   position: relative;
 }
 
-.searchResult .time #options {
+.options:hover {
   cursor: pointer;
+  color: orange;
 }
 
-.searchResult .time #options:hover {
-  color: orange;
+.options .disabled {
+  cursor: normal;
 }
 
 .searchResult img {

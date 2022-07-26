@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import "./merge.css";
 import axios from "axios";
@@ -12,8 +12,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { PageNotif } from "../../components/pageNotif/PageNotif";
+import { MergeContext } from "../../context/MergeContext";
 
-export const Merge = ({spotifyResults, setSpotifyResults}) => {
+export const Merge = () => {
   const [user, setUser] = useState("");
   const [playlistID, setPlaylistID] = useState("");
   const [playlist, setPlaylist] = useState([]);
@@ -25,11 +26,15 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
   const [addNotif, setAddNotif] = useState(false);
   const [errNotif, setErrNotif] = useState(false);
 
+  const { addSongtoMerge, removeSongFromMerge, clearMerge, mergeList } =
+    useContext(MergeContext);
+
   // find some way to get user without using state,, save to localstorage?
 
   let spotifyApi = new SpotifyWebApi({
     accessToken: accessToken,
   });
+
 
   useEffect(() => {
     if (!accessToken) return;
@@ -56,8 +61,8 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
 
   useEffect(() => {
     if (remove) {
-      setSpotifyResults(spotifyResults.filter((song) => song.id != removeID));
       setRemove(false);
+      removeSongFromMerge(removeID);
     }
   }, [remove]);
 
@@ -122,10 +127,7 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
         .searchTracks(track.title)
         .then((data) => {
           console.log("need to check if actually song or not");
-          setSpotifyResults((spotifyResults) => [
-            ...spotifyResults,
-            data.body.tracks.items[0],
-          ]);
+          addSongtoMerge(data.body.tracks.items[0]);
         })
         .catch((err) => {
           return err;
@@ -134,14 +136,16 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
   };
 
   const addToSpotify = () => {
-    let trackIDs = spotifyResults.map((song) => `spotify:track:${song.id}`);
+    let trackIDs = mergeList.map((song) => `spotify:track:${song.id}`);
     spotifyApi
       .addTracksToPlaylist(spotifyPlaylistID, trackIDs)
       .then((data) => {
         console.log("Added tracks to playlist!");
         setAddNotif(true);
       })
-      .then(() => setSpotifyResults([]))
+      .then(() => {
+        clearMerge();
+      })
       .catch((err) => {
         console.log("Something went wrong!", err);
         setErrNotif(true);
@@ -188,8 +192,8 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
       </div>
 
       <div className="spotifyResults">
-        {spotifyResults.length > 0 ? (
-          spotifyResults.map((song, i) => (
+        {mergeList.length > 0 ? (
+          mergeList.map((song, i) => (
             <TempSong
               key={i}
               song={song}
@@ -202,8 +206,11 @@ export const Merge = ({spotifyResults, setSpotifyResults}) => {
         )}
       </div>
       <div className="add"></div>
-      {spotifyResults.length > 0 ? (
-        <button className={`addToSpotify ${!spotifyPlaylistID ? "disabled" : ""}`} onClick={addToSpotify}>
+      {mergeList.length > 0 ? (
+        <button
+          className={`addToSpotify ${!spotifyPlaylistID ? "disabled" : ""}`}
+          onClick={addToSpotify}
+        >
           add to <FontAwesomeIcon icon={faSpotify} />
         </button>
       ) : (

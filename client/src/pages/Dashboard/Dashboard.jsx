@@ -7,6 +7,7 @@ import "./dashboard.css";
 import { accessToken } from "../../utils/spotifyAuth.js";
 import { DashArtists } from "../../components/dashArtists/DashArtists";
 import { Merge } from "../Merge/Merge";
+import { MergeProvider } from "../../context/MergeContext";
 
 export const Dashboard = () => {
   const [activeView, setActiveView] = useState("home");
@@ -24,37 +25,39 @@ export const Dashboard = () => {
   }, [activeView]);
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-main">
-        <div className="dashboard-nav">
-          <Nav activeView={activeView} setActiveView={setActiveView} />
-        </div>
-        <div className="dashboard-right">
-          {activeView === "home" ? (
-            <DashHome accessToken={accessToken} />
-          ) : (
-            <></>
-          )}
-          {activeView === "browse" ? (
-            <DashBrowse
-              accessToken={accessToken}
-              spotifyResults={spotifyResults}
-              setSpotifyResults={setSpotifyResults}
-            />
-          ) : (
-            <></>
-          )}
-          {activeView === "artists" ? <DashArtists /> : <></>}
-          {activeView === "merge" ? (
-            <Merge
-              spotifyResults={spotifyResults}
-              setSpotifyResults={setSpotifyResults}
-            />
-          ) : (
-            <></>
-          )}
+    <MergeProvider>
+      <div className="dashboard">
+        <div className="dashboard-main">
+          <div className="dashboard-nav">
+            <Nav activeView={activeView} setActiveView={setActiveView} />
+          </div>
+          <div className="dashboard-right">
+            {activeView === "home" ? (
+              <DashHome accessToken={accessToken} />
+            ) : (
+              <></>
+            )}
+            {activeView === "browse" ? (
+              <DashBrowse
+                accessToken={accessToken}
+                spotifyResults={spotifyResults}
+                setSpotifyResults={setSpotifyResults}
+              />
+            ) : (
+              <></>
+            )}
+            {activeView === "artists" ? <DashArtists /> : <></>}
+            {activeView === "merge" ? (
+              <Merge
+                spotifyResults={spotifyResults}
+                setSpotifyResults={setSpotifyResults}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </MergeProvider>
   );
 };

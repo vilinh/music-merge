@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./searchResult.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Menu } from "../menu/Menu";
+import { MergeContext } from "../../context/MergeContext";
 
 export const SearchResult = ({
   song,
@@ -13,6 +13,8 @@ export const SearchResult = ({
 }) => {
   const [hoverSearchResult, setHoverSearchResult] = useState(false);
 
+  const { addSongtoMerge, removeSongFromMerge, mergeList } =
+    useContext(MergeContext);
   const handleMouseOver = () => {
     setHoverSearchResult(true);
   };
@@ -50,14 +52,22 @@ export const SearchResult = ({
       <div className="time">
         <span>{convertMsToTime(song.duration_ms)}</span>
         <FontAwesomeIcon
-          id="options"
-          icon={faCirclePlus}
+          className={"options"}
+          icon={
+            mergeList.map((element) => element.id).includes(song.id)
+              ? faCheck
+              : faCirclePlus
+          }
           onClick={() => {
-            console.log(song);
-            setSpotifyResults((spotifyResults) => [...spotifyResults, song]);
+            mergeList.map((element) => element.id).includes(song.id)
+              ? removeSongFromMerge(song.id)
+              : addSongtoMerge(song);
           }}
         />
       </div>
     </div>
   );
 };
+// mergeList.forEach(element => {
+//   console.log(element.id)
+// });

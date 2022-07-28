@@ -116,18 +116,11 @@ export const Nav = ({ activeView, setActiveView }) => {
 
         <span className="subheading">General</span>
         <div
-          id="acct"
-          onClick={(e) => setActiveView("acct")}
-          className={`link ${activeView === "acct" ? "selectedLink" : ""}`}
+          id="account"
+          onClick={(e) => setActiveView("account")}
+          className={`link ${activeView === "account" ? "selectedLink" : ""}`}
         >
           <FontAwesomeIcon icon={faUser} /> Account
-        </div>
-        <div
-          id="settings"
-          onClick={(e) => setActiveView("settings")}
-          className={`link ${activeView === "settings" ? "selectedLink" : ""}`}
-        >
-          <FontAwesomeIcon icon={faGear} /> Settings
         </div>
         <div className="link" onClick={handleLogout}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} /> Log Out

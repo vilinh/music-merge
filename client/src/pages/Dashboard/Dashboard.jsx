@@ -8,6 +8,7 @@ import { accessToken } from "../../utils/spotifyAuth.js";
 import { DashArtists } from "../../components/dashArtists/DashArtists";
 import { Merge } from "../Merge/Merge";
 import { MergeProvider } from "../../context/MergeContext";
+import { Account } from "../Account/Account";
 
 export const Dashboard = () => {
   const [activeView, setActiveView] = useState("home");
@@ -55,6 +56,7 @@ export const Dashboard = () => {
             ) : (
               <></>
             )}
+            {activeView === "account" ? <Account /> : <></>}
           </div>
         </div>
       </div>

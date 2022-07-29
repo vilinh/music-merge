@@ -15,6 +15,7 @@ a {
   --txt-light: #b3c1d8;
   --txt-lighter: #d5dff0;
   --txt-dark: #314067;
+  --mid-border: rgb(212, 212, 212);
   --light-border: #ccc;
   --lighter-border: rgba(0, 0, 0, 0.035);
   --white: #fff;

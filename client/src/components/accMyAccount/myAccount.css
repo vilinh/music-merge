@@ -1,11 +1,3 @@
-.account {
-  padding: 30px;
-  color: var(--txt-dark);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
 .account-panel {
   margin-top: 20px;
   display: flex;

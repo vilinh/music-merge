@@ -39,4 +39,9 @@
 
 .account-main {
   flex: 8;
+  padding: 30px;
+  color: var(--txt-dark);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

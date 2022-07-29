@@ -1,0 +1,28 @@
+.edit-profile {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+.edit-profile h3 {
+  margin-bottom: 20px;
+}
+
+.edit-profile .pic {
+  align-self: center;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.edit-profile .pic {
+  align-items: center;
+}
+
+.edit-profile .pic img {
+  width: 100px;
+  border-radius: 80px;
+}

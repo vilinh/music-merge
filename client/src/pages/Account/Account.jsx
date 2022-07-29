@@ -1,4 +1,5 @@
 import React from "react";
+import { EditProfile } from "../../components/accEditProfile/EditProfile";
 import { MyAccount } from "../../components/accMyAccount/MyAccount";
 import "./account.css";
 
@@ -15,7 +16,7 @@ export const Account = () => {
         <span className="link">appearance</span>
       </div>
       <div className="account-main">
-        <MyAccount />
+        <EditProfile />
       </div>
     </div>
   );
